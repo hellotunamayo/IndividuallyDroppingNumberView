@@ -50,7 +50,7 @@ class IndividuallyDroppingNumberView: UIView {
             let label = UILabel()
             
             //setup label's properties
-            if isMonospaced {
+            if self.isMonospaced {
                 label.font = UIFont.monospacedSystemFont(ofSize: self.characterFontSize, weight: .regular)
             } else {
                 label.font = UIFont.systemFont(ofSize: self.characterFontSize, weight: .regular)
@@ -58,8 +58,10 @@ class IndividuallyDroppingNumberView: UIView {
             label.textAlignment = .center
             label.text = String(item)
             label.clipsToBounds = true
+            label.alpha = 0.0
             label.translatesAutoresizingMaskIntoConstraints = false
-            
+
+            //add subview
             addSubview(label)
             
             //autolayout label
@@ -70,9 +72,6 @@ class IndividuallyDroppingNumberView: UIView {
                                                 constant: trailingConstraintConstant * -1),
                 label.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: -50)
             ])
-            
-            //set alpha
-            label.alpha = 0.0
             
             //animate with delay
             DispatchQueue.main.asyncAfter(deadline: .now() + intervalDelay) { [weak self] in
